@@ -1,0 +1,86 @@
+==================================================
+PHP / README.md
+==================================================
+
+# PHP + MongoDB (XAMPP)
+
+1. Copy `php_mongo.dll` into `xampp/php/ext`.
+2. Open `xampp/php/php.ini` (Config -> PHP) and add: `extension=php_mongo.dll`
+3. Save the .php files in `C:\xampp\htdocs\`
+4. Start Apache in XAMPP, then open `http://localhost/insert.php` (then update, retrieve, delete).
+
+Note: `MongoClient` is the **legacy** `mongo` extension (PHP 5.x). It does not exist in PHP 7+/8
+(those use the `mongodb` extension + `MongoDB\Client`), so use the PHP version your lab uses.
+
+==================================================
+PHP / delete.php
+==================================================
+
+<?php
+$m = new MongoClient();
+echo "Connection to database successfully";
+$db = $m -> MYDB239720;
+echo "\nDatabase selected successfully";
+$col = $db -> MyCol;
+echo "\nCollection selected successfully";
+$col -> remove(array("name" => "Romal"));
+echo "\nDocument deleted successfully";
+?>
+
+==================================================
+PHP / insert.php
+==================================================
+
+<?php
+$m = new MongoClient();
+echo "Connection to database successfully";
+$db = $m -> MYDB239720;
+echo "\nDatabase selected successfully";
+$col = $db -> MyCol;
+echo "\nCollection selected successfully";
+$doc = array(
+    "name"   => "Romal",
+    "age"    => 20,
+    "dept"   => "TYIT",
+    "rollno" => 239720
+);
+$col -> insert($doc);
+echo "\nDocument inserted successfully";
+?>
+
+==================================================
+PHP / retrieve.php
+==================================================
+
+<?php
+$m = new MongoClient();
+echo "Connection to database successfully";
+$db = $m -> MYDB239720;
+echo "\nDatabase selected successfully";
+$col = $db -> MyCol;
+echo "\nCollection selected successfully";
+$cursor = $col -> find();
+foreach ($cursor as $doc)
+{
+    echo "<br/>";
+    echo $doc["name"]."<br/>";
+    echo $doc["age"]."<br/>";
+    echo $doc["dept"]."<br/>";
+    echo $doc["rollno"]."<br/>";
+}
+?>
+
+==================================================
+PHP / update.php
+==================================================
+
+<?php
+$m = new MongoClient();
+echo "Connection to database successfully";
+$db = $m -> MYDB239720;
+echo "\nDatabase selected successfully";
+$col = $db -> MyCol;
+echo "\nCollection selected successfully";
+$col -> update(array("name" => "Romal"), array('$set' => array("age" => 19)));
+echo "\nDocument updated successfully";
+?>

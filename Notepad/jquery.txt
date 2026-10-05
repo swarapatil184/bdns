@@ -1,0 +1,424 @@
+
+==================================================
+07-jquery-basics-and-effects / 01_button_click.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#btn").click(function () {
+                document.write("Hello Romal")
+            })
+        })
+    </script>
+</head>
+<body>
+    <p>Romal: 239720</p>
+    <button id="btn">Click Me</button>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 02_selectors.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".class1").css("background", "lightblue");   // by class
+            $("#id1").css("background", "pink");           // by id
+            $("h2").css("background", "lightgreen");       // by element name
+        })
+    </script>
+</head>
+<body>
+    <p class="class1">Romal: 239720</p>
+    <p id="id1">Romal Shah</p>
+    <h2>Welcome Romal</h2>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 03_events_click_hover_on_off_trigger.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#b1").hover(function () {
+                document.write("Hello Romal")
+            });
+            $("p").on("click", function () {
+                $(this).css("background", "yellow");
+            });
+            $("#b2").click(function () {
+                $("p").off("click");
+            });
+            $("#b3").on("click", function () {
+                $("#t1").hide();
+            });
+            $("input").select(function () {
+                $("input").after("Text Marked!")
+            });
+            $("#b4").click(function () {
+                $("input").trigger("select");
+            });
+        })
+    </script>
+</head>
+<body>
+    <button id="b1">Hover</button><br>
+    <p>Welcome to the Mulund College</p><br>
+    <p>Romal: 239720</p><br>
+    <button id="b2">Off</button><br>
+    <p id="t1">Hello Romal</p><br>
+    <button id="b3">On</button><br>
+    <input type="text" value="Romal 239720"><br>
+    <button id="b4">Trigger</button><br>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 04_show_hide.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#b1").click(function () {
+                $("p").hide();
+            });
+            $("#b2").click(function () {
+                $("p").show();
+            })
+        })
+    </script>
+</head>
+<body>
+    <p>Romal Shah:239720</p>
+    <button id="b1">Hide</button>
+    <button id="b2">Show</button>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 05_toggle.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("p").toggle();
+            });
+        })
+    </script>
+</head>
+<body>
+    <p>Romal Shah:239720</p>
+    <button>Toggle</button>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 06_fade_in_out.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".c1").click(function () {
+                $("p").fadeOut(5000);
+            });
+            $(".c2").click(function () {
+                $("p").fadeIn(5000);
+            })
+        })
+    </script>
+</head>
+<body>
+    <p>Romal Shah:239720</p>
+    <button class="c1">Fade Out</button>
+    <button class="c2">Fade In</button>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 07_fade_toggle.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("p").fadeToggle(5000);
+            });
+        })
+    </script>
+</head>
+<body>
+    <p>Romal Shah:239720</p>
+    <button>Fade Toggle</button>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 08_slide_up_down.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#b1").click(function () {
+                $("p").slideUp(3000);
+            });
+            $("#b2").click(function () {
+                $("p").slideDown(3000);
+            })
+        })
+    </script>
+</head>
+<body>
+    <p>Romal Shah:239720</p>
+    <button id="b1">Slide Up</button>
+    <button id="b2">Slide Down</button>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 09_slide_toggle.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("p").slideToggle(5000);
+            })
+        })
+    </script>
+</head>
+<body>
+    <p>Romal Shah:239720</p>
+    <button>Slide Toggle</button>
+</body>
+</html>
+
+==================================================
+07-jquery-basics-and-effects / 10_mouse_event.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#p1").mouseleave(function () {
+                alert("Bye! You now leave p1");
+            })
+        })
+    </script>
+</head>
+<body>
+    <p id="p1">This is a paragraph</p>
+</body>
+</html>
+
+==================================================
+08-jquery-animation-chaining / 01_animation.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("img").animate({left: 50});
+            })
+        })
+    </script>
+    <style>
+        img { position: relative; }
+    </style>
+</head>
+<body>
+    <p>Romal:239720</p>
+    <!-- put any image named Mountain.png in this folder -->
+    <img src="Mountain.png" alt="Mountain Image"><br>
+    <br><button>Start Animation</button>
+</body>
+</html>
+
+==================================================
+08-jquery-animation-chaining / 02_animate_multiple_css.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#b1").click(function () {
+                $("#div1").animate({width: "150px", height: "150px", opacity: "0.5", left: "150"});
+            })
+        })
+    </script>
+    <style>
+        #div1 { width: 100px; height: 100px; background: yellow; position: relative; }
+    </style>
+</head>
+<body>
+    <p>Animation</p>
+    <div id="div1"></div>
+    <button id="b1">Click to Animate</button>
+</body>
+</html>
+
+==================================================
+08-jquery-animation-chaining / 03_method_chaining.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("#p1").css("color", "blue").slideUp(2000).slideDown(2000)
+            })
+        })
+    </script>
+</head>
+<body>
+    <p id="p1">Romal:239720</p>
+    <button>Click Me</button>
+</body>
+</html>
+
+==================================================
+09-jquery-callback-get-set / 01_effect_with_callback.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("button").click(function () {
+                $("p").hide("slow", function () {
+                    alert("The paragraph is now hidden")
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <p>Romal:239720</p>
+    <p>Welcome to MCC</p>
+    <button>Click!</button>
+</body>
+</html>
+
+==================================================
+09-jquery-callback-get-set / 02_get_set_text.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#b1").click(function () {
+                var str = $("p").text();
+                alert(str);
+            })
+            $("#b2").click(function () {
+                $("p").text("Hello World");
+            })
+        })
+    </script>
+</head>
+<body>
+    <p>Romal Shah:239720</p>
+    <p>MongoDB</p>
+    <button id="b1">Get</button>
+    <button id="b2">Set</button>
+</body>
+</html>
+
+==================================================
+09-jquery-callback-get-set / 03_get_set_html.html
+==================================================
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Basic jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#b1").click(function () {
+                var str = $("p").html();
+                alert(str);
+            })
+            $("#b2").click(function () {
+                $("p").html("<b>Hello World</b>");
+            })
+        })
+    </script>
+</head>
+<body>
+    <p><b>Romal Shah:</b><u>239720</u></p>
+    <p>MongoDB</p>
+    <button id="b1">Get</button>
+    <button id="b2">Set</button>
+</body>
+</html>

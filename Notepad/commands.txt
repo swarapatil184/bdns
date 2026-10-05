@@ -1,0 +1,143 @@
+
+==================================================
+01-mongodb-basics-1
+==================================================
+
+Practical 1 - MongoDB Basics: 1
+
+Type these in the `mongo` shell one by one (`use` is a shell command, so this is not a runnable .js script).
+
+--- A. Create and drop database
+show dbs
+use Romal
+show dbs                      // new db appears only after it has a collection
+db.createCollection("Practical1")
+show collections
+show dbs
+db.dropDatabase()
+
+--- B. Create, display and drop collection
+use Romal
+show collections
+db.createCollection("Practical1")
+show collections
+db.Practical1.drop()
+
+--- C. Insert, query, update and delete a document
+use Romal
+db.Doc.insert({Name:"Romal", Age:10})
+db.Doc.find()
+db.Doc.update({Name:"Romal"}, {$set:{Age:20}})
+db.Doc.find()
+db.Doc.remove()                  // ERROR: remove needs a query
+db.Doc.remove({"Name":"Romal"})
+db.Doc.find()
+
+--- D. Employee queries
+// 1) Insert and display the documents in the Employee collection
+use Employee
+db.col.insertMany([
+  {Name:"Smitu",  Salary:100000, Dept:"ID",        City:"Mumbai"},
+  {Name:"Romal",  Salary:15000,  Dept:"IT",        City:"Thane"},
+  {Name:"Sujal",  Salary:9000,   Dept:"Tester",    City:"Bandra"},
+  {Name:"Manav",  Salary:30000,  Dept:"Finance",   City:"Kurla"},
+  {Name:"Swathi", Salary:4000,   Dept:"Developer", City:"Pune"}
+])
+db.col.find()
+
+// 2) Employees who live in Mumbai
+db.col.find({City:"Mumbai"})
+
+// 3) Employees staying in Kurla and salary greater than 19000
+db.col.find({City:"Kurla", Salary:{$gt:19000}})
+
+// 4) Salary >= 10000 but < 20000
+db.col.find({Salary:{$gte:10000, $lt:20000}})
+
+// 5) Staying in either Thane or Mumbai and salary greater than 10000
+db.col.find({$or:[{City:"Mumbai"},{City:"Thane"}], Salary:{$gt:10000}})
+
+// 6) Salary not equal to 10000 and working in Developer or Tester department
+db.col.find({$or:[{Dept:"Developer"},{Dept:"Tester"}], Salary:{$ne:10000}})
+
+==================================================
+02-mongodb-basics-2
+==================================================
+
+Practical 2 - MongoDB Basics: 2
+
+// 3. Insert the documents
+use Data
+db.col.insertMany([
+  {Name:"Romal", Age:20, Country:"India",  Gender:"Female"},
+  {Name:"Raj",   Age:12, Country:"Russia", Gender:"Male"},
+  {Name:"Sujal", Age:25, Country:"USA",    Gender:"Male"},
+  {Name:"Sara",  Age:65, Country:"India",  Gender:"Female"},
+  {Name:"Koyal", Age:30, Country:"USA",    Gender:"Female"}
+])
+db.col.find()
+
+// 4. Update the country to UK for all female users
+db.col.updateMany({Gender:"Female"}, {$set:{Country:"UK"}})
+db.col.find()
+
+// 5. Add the new field Company to all the documents
+db.col.updateMany({}, {$set:{Company:"Wipro"}})
+db.col.find()
+
+// 6. Delete all the documents where Gender = Male
+db.col.remove({"Gender":"Male"})
+db.col.find()
+
+// 1. Count of female users who stay in either India or USA
+//    (returns 0 here because step 4 changed every female user's country to UK)
+db.col.find({$or:[{Country:"India"},{Country:"USA"}], Gender:"Female"}).count()
+
+// 2. Display the name and age of all female employees
+db.col.find({Gender:"Female"}, {Name:1, Age:1})
+
+==================================================
+03-aggregate-functions
+==================================================
+
+Practical 3 - Aggregate Functions
+
+--- Insert collection and display all records
+use Aggregate
+db.col.insertMany([
+  {Name:"Romal", Age:17, City:"Mumbai", Salary:12000},
+  {Name:"Rohan", Age:22, City:"Thane",  Salary:60000},
+  {Name:"Sujal", Age:19, City:"Mumbai", Salary:3000},
+  {Name:"Manav", Age:47, City:"Pune",   Salary:55000},
+  {Name:"Ria",   Age:34, City:"Mumbai", Salary:83000}
+])
+db.col.find()
+
+--- Aggregate functions
+(The journal reuses the output name `cityCount` for every query.)
+// 1. Group by - count
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$sum:1}}}])
+
+// 2. Sum
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$sum:"$Salary"}}}])
+
+// 3. Avg
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$avg:"$Salary"}}}])
+
+// 4. Min
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$min:"$Salary"}}}])
+
+// 5. Max
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$max:"$Salary"}}}])
+
+// 6. First
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$first:"$Salary"}}}])
+
+// 7. Last
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$last:"$Salary"}}}])
+
+// 8. addToSet (unique values)
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$addToSet:"$Salary"}}}])
+
+// 9. push (all values)
+db.col.aggregate([{$group:{_id:"$City", cityCount:{$push:"$Salary"}}}])
